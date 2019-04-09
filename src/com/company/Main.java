@@ -5,37 +5,52 @@ import java.util.Scanner;
 public class Main {
 
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
 
 
     public static void main(String[] args) {
         // write your code here
         System.out.println("Begin");
 
-        int n = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        int n = Integer.parseInt(scan.nextLine().trim());
 
-        int result = viralAdvertising(n);
-        System.out.println("result = " + result);
+        int[] grades = new int[n];
 
-        scanner.close();
-    }
-
-    private static int viralAdvertising(int n) {
-
-
-        double shared = 5;
-        double liked = 0;
-        double cumulative = 0;
-        double temp = 0;
-
-        for (int i = 1; i <= n; i++) {
-            liked = Math.floor(shared/2);
-            cumulative = liked + cumulative;
-            shared = liked * 3;
-
+        for (int gradesItr = 0; gradesItr < n; gradesItr++) {
+            int gradesItem = Integer.parseInt(scan.nextLine().trim());
+            grades[gradesItr] = gradesItem;
         }
 
-        return (int) cumulative;
+        int[] result = gradingStudents(grades);
+
+        for (int a : result) {
+            System.out.println("a = " + a);
+        }
+
+        scan.close();
     }
+
+    private static int[] gradingStudents(int[] grades) {
+
+
+        int[] newGrades = new int[grades.length];
+        System.out.println("Main.gradingStudents");
+        for (int i = 0; i < grades.length; i++) {
+            if (grades[i] >= 38) {
+                int temp = ((grades[i] / 5) * 5) + 5;
+                System.out.println("temp = " + temp);
+                if ((temp-grades[i]) < 3) {
+                    newGrades[i] = temp;
+                }else{
+                    newGrades[i] = grades[i];
+                }
+            } else {
+                newGrades[i] = grades[i];
+            }
+        }
+
+        return newGrades;
+    }
+
+
 }
