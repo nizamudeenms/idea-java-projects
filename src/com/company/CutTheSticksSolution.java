@@ -3,6 +3,7 @@ package com.company;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CutTheSticksSolution {
@@ -26,8 +27,6 @@ public class CutTheSticksSolution {
         }
 
 
-
-
         int[] result = cutTheSticks(arr);
 
         for (int i = 0; i < result.length; i++) {
@@ -41,11 +40,36 @@ public class CutTheSticksSolution {
 
     // Complete the cutTheSticks function below.
     static int[] cutTheSticks(int[] arr) {
-        int[] op = arr;
+        int[] op = new int[5];
+        int[] firstItemArray = new int[arr.length];
+        Arrays.fill(firstItemArray, arr[0]);
+
+        int totalSticks = arr.length;
+        int sticksCut = 0;
+        int smallestStick = arr[0];
+        String cont = "NOTDONE";
 
         for (int i = 0; i < arr.length; i++) {
+            System.out.println("i: " + i + " result = " + arr[i]);
+        }
 
-            System.out.println("result = "+" I " + i +" " + arr[i]);
+        while (!Arrays.equals(arr, firstItemArray)) {
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] < smallestStick) {
+                    smallestStick = arr[i];
+                }
+            }
+            System.out.println("smallestStick = " + smallestStick);
+
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i]!= 0 && smallestStick !=0) {
+                    arr[i] = arr[i] % smallestStick;
+                    sticksCut++;
+                }
+            }
+            System.out.println("sticksCut = " + sticksCut);
+
+
         }
 
 
